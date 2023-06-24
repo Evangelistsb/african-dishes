@@ -1,9 +1,9 @@
 {
-    "name": "african-dishes",
+    "name": "african-dishes-project",
     "version": "1.0.0",
-    "description": "Custom Celo Composer project.",
+    "description": "My submission for the celo frontend project on dacade",
     "private": true,
-    "author": "Celo",
+    "author": "Shun",
     "license": "MIT",
     "scripts": {
         "react-app:dev": "yarn workspace @african-dishes/react-app dev",
