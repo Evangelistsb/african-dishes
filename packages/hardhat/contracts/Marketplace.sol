@@ -150,4 +150,32 @@ contract Marketplace {
         // Increases the number of times the product has been sold
         products[_index].sold++;
     }
+
+    function getProductsLength() public view returns (uint256) {
+        return (productsLength);
+    }
+
+    //
+    function getProductCreated(address _address) public view returns (uint256) {
+        return productsCreated[_address];
+    }
+
+    function setReaction(uint256 _productId, uint256 _reactionId) public {
+        address[] storage _reactions = reactions[_productId][_reactionId];
+        for (uint256 i = 0; i < _reactions.length; i++) {
+            // If user has already reacted, remove their reaction
+            if (_reactions[i] == msg.sender) {
+                // Delete reaction from array
+                _reactions[i] = _reactions[_reactions.length - 1];
+                _reactions.pop();
+                return;
+            }
+        }
+        // Add user reaction to array
+        _reactions.push(msg.sender);
+    }
+
+    function getReactions(uint256 _productId, uint256 _reactionId) public view returns (address[] memory) {
+        return reactions[_productId][_reactionId];
+    }
 }
