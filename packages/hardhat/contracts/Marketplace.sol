@@ -72,9 +72,9 @@ contract Marketplace {
 
     // Mapping of products to their index
     mapping(uint256 => Product) internal products;
-    //
+    // mapping of all reactions
     mapping(uint256 => mapping(uint256 => address[])) internal reactions;
-    //
+    // mapping of products created for each product creator
     mapping(address => uint256) internal productsCreated;
 
     // Writes a new product to the marketplace
@@ -151,15 +151,17 @@ contract Marketplace {
         products[_index].sold++;
     }
 
+    // Returns the number of products in the marketplace
     function getProductsLength() public view returns (uint256) {
         return (productsLength);
     }
 
-    //
+    // Returns the number of products created by _address
     function getProductCreated(address _address) public view returns (uint256) {
         return productsCreated[_address];
     }
 
+    // Set reaction
     function setReaction(uint256 _productId, uint256 _reactionId) public {
         address[] storage _reactions = reactions[_productId][_reactionId];
         for (uint256 i = 0; i < _reactions.length; i++) {
@@ -175,6 +177,7 @@ contract Marketplace {
         _reactions.push(msg.sender);
     }
 
+    // Get reactions
     function getReactions(uint256 _productId, uint256 _reactionId) public view returns (address[] memory) {
         return reactions[_productId][_reactionId];
     }
