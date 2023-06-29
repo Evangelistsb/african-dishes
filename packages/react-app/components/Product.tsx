@@ -65,6 +65,7 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
     getFormatProduct();
   }, [getFormatProduct]);
 
+
   // Define the handlePurchase function which handles the purchase interaction with the smart contract
   const handlePurchase = async () => {
     if (!approve || !purchase) {
@@ -80,6 +81,18 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
     // Wait for the transaction to be mined
     await res.wait();
   };
+
+  const handleReact = async (val: number) => {
+    // If the writeAsync function is empty, throw error
+    if (!setReaction) {
+      throw "Failed to rate product"
+    }
+    const reactionTx = await setReaction({
+      recklesslySetUnpreparedArgs: [Number(id), val]
+    })
+    setLoading("Mining transaction");
+    await reactionTx.wait()
+  }
 
   // Define the purchaseProduct function that is called when the user clicks the purchase button
   const purchaseProduct = async () => {
@@ -107,6 +120,29 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
       setLoading(null);
     }
   };
+
+  const react = async (reaction: string, val: number) => {
+    setLoading(`Reaction with ${reaction.toUpperCase()}`);
+    try {
+      // If the user is not connected, trigger the wallet connect modal
+      if (!address && openConnectModal) {
+        openConnectModal();
+        return;
+      }
+      // If the user is connected, call the handlePurchase function and display a notification
+      await toast.promise(handleReact(val), {
+        pending: "Reacting...",
+        success: "Reacted successfully",
+        error: "Failed to react",
+      });
+    } catch (e: any) {
+      console.log({ e });
+      setError(e?.reason || e?.message || "Something went wrong. Try again.");
+      // Once the purchase is complete, clear the loading state
+    } finally {
+      setLoading(null);
+    }
+  }
 
   // If the product cannot be loaded, return null
   if (!product) return null;
