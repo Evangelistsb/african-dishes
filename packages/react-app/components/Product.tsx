@@ -11,7 +11,7 @@ import { ethers } from "ethers";
 import { useConnectModal } from "@rainbow-me/rainbowkit";
 // Import the useAccount hook to get the user's address
 import { useAccount } from "wagmi";
-// Import the toast library to display notifications
+// Import the toast library to display notification
 import { toast } from "react-toastify";
 // Import our custom identicon template to display the owner of the product
 import { identiconTemplate } from "@/helpers";
@@ -27,7 +27,6 @@ interface Product {
   owner: string;
   image: string;
   description: string;
-  location: string;
   sold: boolean;
 }
 
