@@ -166,13 +166,18 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
     <div className="relative group w-full lg:w-[370px]">
       <div className="absolute -inset-1 bg-gradient-to-r from-purple-600 to-pink-600 rounded-lg blur opacity-25 group-hover:opacity-100 transition duration-1000 group-hover:duration-200"></div>
       <div className="relative px-1 py-1 bg-white ring-1 ring-gray-900/5 rounded-lg leading-none flex flex-col justify-start">
+        {/* Product Image */}
         <img className="h-[300px] rounded-t-md" src={product.image}/>
         <div className="m-5">
+          {/* Product Name */}
           <div className="mb-3 flex justify-between items-center m-auto">
             <div className="text-3xl">{product.name}</div>
+            {/* Product price */}
             <div className="font-mono text-xl">${productPriceFromWei} cUSD</div>
           </div>
+          {/* Product description */}
           <div className="text-gray-500 my-4">{product.description}</div>
+          {/* List of reactions on product */}
           <div className="h-[60px] flex gap-2 justify-center items-center">
             <div className="flex flex-col items-center">
               <div className="text-gray-700">{deliciousReaction.length || 0}</div>
@@ -198,7 +203,8 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
               <div className="text-gray-700">{suspeciousReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("suspecious", 6)}>&#129488;</div>
             </div>
-            
+
+            {/* Purchase button */}
           </div>
           <div className="flex justify-center items-center mt-8 mb-5 w-full">
             <button onClick={purchaseProduct} className="w-full relative inline-flex items-center justify-center p-4 px-6 py-5 overflow-hidden font-medium text-indigo-600 transition duration-300 ease-out border-2 border-purple-500 rounded-full shadow-md group">
@@ -213,6 +219,7 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
             </button>
           </div>
           <hr className="w-full"/>
+          {/* Product owner details */}
           <div className="flex justify-start items-center gap-3 mt-4">
             {identiconTemplate(product.owner)}
             <div className="flex flex-col gap-1">
