@@ -1,5 +1,5 @@
 {
-    "address": "0x67d87837504C5f271ef0561CBC80bE08114E127C",
+    "address": "0xa5Ad321631dD4B25477649f9b9dBD54dD28637E9",
     "abi": [
       {
         "inputs": [
@@ -15,6 +15,25 @@
         "type": "function"
       },
       {
+        "inputs": [
+          {
+            "internalType": "address",
+            "name": "_address",
+            "type": "address"
+          }
+        ],
+        "name": "getProductCreated",
+        "outputs": [
+          {
+            "internalType": "uint256",
+            "name": "",
+            "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
         "inputs": [],
         "name": "getProductsLength",
         "outputs": [
@@ -22,6 +41,30 @@
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
+          }
+        ],
+        "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_productId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_reactionId",
+            "type": "uint256"
+          }
+        ],
+        "name": "getReactions",
+        "outputs": [
+          {
+            "internalType": "address[]",
+            "name": "",
+            "type": "address[]"
           }
         ],
         "stateMutability": "view",
@@ -58,11 +101,6 @@
             "type": "string"
           },
           {
-            "internalType": "string",
-            "name": "",
-            "type": "string"
-          },
-          {
             "internalType": "uint256",
             "name": "",
             "type": "uint256"
@@ -74,6 +112,24 @@
           }
         ],
         "stateMutability": "view",
+        "type": "function"
+      },
+      {
+        "inputs": [
+          {
+            "internalType": "uint256",
+            "name": "_productId",
+            "type": "uint256"
+          },
+          {
+            "internalType": "uint256",
+            "name": "_reactionId",
+            "type": "uint256"
+          }
+        ],
+        "name": "setReaction",
+        "outputs": [],
+        "stateMutability": "nonpayable",
         "type": "function"
       },
       {
@@ -91,11 +147,6 @@
           {
             "internalType": "string",
             "name": "_description",
-            "type": "string"
-          },
-          {
-            "internalType": "string",
-            "name": "_location",
             "type": "string"
           },
           {

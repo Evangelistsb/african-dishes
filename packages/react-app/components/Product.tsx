@@ -175,27 +175,27 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
           <div className="text-gray-500 my-4">{product.description}</div>
           <div className="h-[60px] flex gap-2 justify-center items-center">
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{deliciousReaction.length}</div>
+              <div className="text-gray-700">{deliciousReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("delicious", 1)}>&#128523;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{whateverReaction.length}</div>
+              <div className="text-gray-700">{whateverReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("whatever", 2)}>&#128528;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{sourReaction.length}</div>
+              <div className="text-gray-700">{sourReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("sour", 3)}>&#128534;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{allergicReaction.length}</div>
+              <div className="text-gray-700">{allergicReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("allergic", 4)}>&#129314;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{expensiveReaction.length}</div>
+              <div className="text-gray-700">{expensiveReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("expensive", 5)}>&#129297;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{suspeciousReaction.length }</div>
+              <div className="text-gray-700">{suspeciousReaction.length || 0}</div>
               <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("suspecious", 6)}>&#129488;</div>
             </div>
             
