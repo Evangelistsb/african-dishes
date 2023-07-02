@@ -35,9 +35,9 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
   const { address } = useAccount();
   // Use the useContractCall hook to read the data of the product with the id passed in, from the marketplace contract
   const { data: rawProduct }: any = useContractCall("readProduct", [id], true);
-  //
+  // use the useContractCall hool to read the number of products the usr has created
   const {data: productsCreated}: any = useContractCall("getProductCreated", [address], true)
-  //
+  // use the useContractCall hook to read the reactions of a product
   const {data: deliciousReaction}: any = useContractCall("getReactions", [id, 1], true)
   const {data: whateverReaction}: any = useContractCall("getReactions", [id, 2], true)
   const {data: sourReaction}: any = useContractCall("getReactions", [id, 3], true)
