@@ -36,7 +36,7 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
   // Use the useContractCall hook to read the data of the product with the id passed in, from the marketplace contract
   const { data: rawProduct }: any = useContractCall("readProduct", [id], true);
   // use the useContractCall hool to read the number of products the usr has created
-  const {data: productsCreated}: any = useContractCall("getProductCreated", [address], true)
+  const {data: productsCreated}: any = useContractCall("getProductCreated", [rawProduct[0]], true)
   // use the useContractCall hook to read the reactions of a product
   const {data: deliciousReaction}: any = useContractCall("getReactions", [id, 1], true)
   const {data: whateverReaction}: any = useContractCall("getReactions", [id, 2], true)
@@ -46,10 +46,10 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
   const {data: suspeciousReaction}: any = useContractCall("getReactions", [id, 6], true)
   // Use the useContractSend hook to purchase the product with the id passed in, via the marketplace contract
   const { writeAsync: purchase } = useContractSend("buyProduct", [Number(id)]);
-  //
+  // Use useContractSend hook to set a particular reaction
   const {writeAsync:setReaction} = useContractSend("setReaction", [Number(id), Number(0)]);
 
-  //
+  // State variable
   const [product, setProduct] = useState<Product | null>(null);
   // Use the useContractApprove hook to approve the spending of the product's price, for the ERC20 cUSD contract
   const { writeAsync: approve } = useContractApprove(
@@ -180,28 +180,28 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
           {/* List of reactions on product */}
           <div className="h-[60px] flex gap-2 justify-center items-center">
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{deliciousReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("delicious", 1)}>&#128523;</div>
+              <div className="text-gray-700">{deliciousReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("delicious", 1)}>&#128523;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{whateverReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("whatever", 2)}>&#128528;</div>
+              <div className="text-gray-700">{whateverReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("whatever", 2)}>&#128528;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{sourReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("sour", 3)}>&#128534;</div>
+              <div className="text-gray-700">{sourReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("sour", 3)}>&#128534;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{allergicReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("allergic", 4)}>&#129314;</div>
+              <div className="text-gray-700">{allergicReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("allergic", 4)}>&#129314;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{expensiveReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("expensive", 5)}>&#129297;</div>
+              <div className="text-gray-700">{expensiveReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("expensive", 5)}>&#129297;</div>
             </div>
             <div className="flex flex-col items-center">
-              <div className="text-gray-700">{suspeciousReaction.length || 0}</div>
-              <div className="text-[45px] hover:text-[60px] cursor-pointer" onClick={() => react("suspecious", 6)}>&#129488;</div>
+              <div className="text-gray-700">{suspeciousReaction?.length || 0}</div>
+              <div className="text-[35px] hover:text-[60px] cursor-pointer" onClick={() => react("suspecious", 6)}>&#129488;</div>
             </div>
 
             {/* Purchase button */}
@@ -226,7 +226,7 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
               <Link href={`https://explorer.celo.org/alfajores/address/${product.owner}`}>
                 <div className="text-gray-500 font-mono text-sm w-[60px] overflow-hidden text-ellipsis">{product.owner}</div>
               </Link>
-              <div className="text-gray-500">{Number(productsCreated)} products created</div>
+              <div className="text-gray-500">{Number(productsCreated || 0)} products created</div>
             </div>
           </div>
         </div>
