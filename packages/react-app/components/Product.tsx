@@ -35,8 +35,6 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
   const { address } = useAccount();
   // Use the useContractCall hook to read the data of the product with the id passed in, from the marketplace contract
   const { data: rawProduct }: any = useContractCall("readProduct", [id], true);
-  // use the useContractCall hool to read the number of products the usr has created
-  const {data: productsCreated}: any = useContractCall("getProductCreated", [rawProduct[0]], true)
   // use the useContractCall hook to read the reactions of a product
   const {data: deliciousReaction}: any = useContractCall("getReactions", [id, 1], true)
   const {data: whateverReaction}: any = useContractCall("getReactions", [id, 2], true)
@@ -69,6 +67,9 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
       sold: rawProduct[5].toString(),
     });
   }, [rawProduct]);
+
+  // use the useContractCall hool to read the number of products the usr has created
+  const {data: productsCreated}: any = useContractCall("getProductCreated", [product?.owner], true)
 
   // Call the getFormatProduct function when the rawProduct state changes
   useEffect(() => {
@@ -226,7 +227,7 @@ const Product = ({ id, setError, setLoading, clear }: any) => {
               <Link href={`https://explorer.celo.org/alfajores/address/${product.owner}`}>
                 <div className="text-gray-500 font-mono text-sm w-[60px] overflow-hidden text-ellipsis">{product.owner}</div>
               </Link>
-              <div className="text-gray-500">{Number(productsCreated || 0)} products created</div>
+              <div className="text-gray-500">{Number(productsCreated)} products created</div>
             </div>
           </div>
         </div>
